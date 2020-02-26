@@ -236,21 +236,21 @@ hashMapStrict :: Decoder a -> Decoder (HS.HashMap Text a)
 hashMapStrict (Decoder d) = Decoder $ \case
   Object xs -> traverse d xs
   val -> typeMismatch "Array" val
-{-|# INLINE hashMapStrict #-}
+{-# INLINE hashMapStrict #-}
 
 hashMapLazy :: Decoder a -> Decoder (HL.HashMap Text a)
 hashMapLazy (Decoder d) = Decoder $ \case
   Object xs -> traverse d xs
   val -> typeMismatch "Array" val
-{-|# INLINE hashMapLazy #-}
+{-# INLINE hashMapLazy #-}
 
 mapStrict :: Decoder a -> Decoder (MS.Map Text a)
 mapStrict dec = MS.fromList . HL.toList <$> hashMapLazy dec
-{-|# INLINE mapStrict #-}
+{-# INLINE mapStrict #-}
 
 mapLazy :: Decoder a -> Decoder (ML.Map Text a)
 mapLazy dec = ML.fromList . HL.toList <$> hashMapLazy dec
-{-|# INLINE mapStrict #-}
+{-# INLINE mapLazy #-}
 
 
 -- Instances
